@@ -15,6 +15,7 @@ import * as captcha from '@midwayjs/captcha';
 import * as redis from '@midwayjs/redis';
 import * as cache from '@midwayjs/cache';
 import * as orm from '@midwayjs/typeorm';
+import {ExceptionFilter} from "./filter/exception.filter";
 
 @Configuration({
   imports: [
@@ -47,6 +48,6 @@ export class ContainerLifeCycle {
     // add middleware
     this.app.useMiddleware([ReportMiddleware]);
     // add filter
-    // this.app.useFilter([NotFoundFilter, DefaultErrorFilter]);
+    this.app.useFilter([ExceptionFilter]);
   }
 }
