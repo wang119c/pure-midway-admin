@@ -1,5 +1,4 @@
-import {HttpStatus, MidwayHttpError} from "@midwayjs/core";
-
+import { HttpStatus, MidwayHttpError } from '@midwayjs/core';
 
 export class CustomHttpError extends MidwayHttpError {
   constructor(message, code = HttpStatus.BAD_REQUEST) {

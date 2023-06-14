@@ -1,6 +1,6 @@
-import {ILogger} from '@midwayjs/core';
-import {Catch, Logger} from '@midwayjs/decorator';
-import {RES_CODE} from "../constant";
+import { ILogger } from '@midwayjs/core';
+import { Catch, Logger } from '@midwayjs/decorator';
+import { RES_CODE } from '../constant';
 
 /**
  * 全局异常处理
@@ -11,11 +11,12 @@ export class ExceptionFilter {
   coreLogger: ILogger;
 
   async catch(err) {
+    console.log("===111111===")
     this.coreLogger.error(err);
     return {
-      code: err.status || RES_CODE.Fail,
+      code: err.status || RES_CODE.CommFail,
       message: err.message,
-      data: null
+      data: null,
     };
   }
 }

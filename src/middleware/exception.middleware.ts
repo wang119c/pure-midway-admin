@@ -6,6 +6,7 @@ import {Context, NextFunction} from "@midwayjs/koa";
 export class ExceptionMiddleware implements IMiddleware<Context, NextFunction> {
   resolve() {
     return async (ctx: Context, next: NextFunction) => {
+      console.log("===222222===")
       try {
         await next()
       } catch (err) {

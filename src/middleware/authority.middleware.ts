@@ -34,7 +34,7 @@ export class AuthorityMiddleware implements IMiddleware<Context, NextFunction> {
   };
 
   match(ctx: Context): boolean {
-    const ignore = ctx.path.indexOf("/login/") !== -1
+    const ignore = ctx.path.indexOf("/open/") !== -1
     return !ignore
   }
 
