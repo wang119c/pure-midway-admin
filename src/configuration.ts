@@ -16,7 +16,8 @@ import * as redis from '@midwayjs/redis';
 import * as cache from '@midwayjs/cache';
 import * as orm from '@midwayjs/typeorm';
 import {ExceptionFilter} from "./filter/exception.filter";
-
+import {AuthorityMiddleware} from "./middleware/authority.middleware";
+import * as file from '../packages/file'
 @Configuration({
   imports: [
     koa,
@@ -37,6 +38,7 @@ import {ExceptionFilter} from "./filter/exception.filter";
       component: info,
       enabledEnvironment: ['local'],
     },
+    file
   ],
   importConfigs: [join(__dirname, './config')],
 })
@@ -46,7 +48,7 @@ export class ContainerLifeCycle {
 
   async onReady() {
     // add middleware
-    this.app.useMiddleware([ReportMiddleware]);
+    this.app.useMiddleware([ReportMiddleware , AuthorityMiddleware]);
     // add filter
     this.app.useFilter([ExceptionFilter]);
   }

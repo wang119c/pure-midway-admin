@@ -1,6 +1,6 @@
 import {Body, Controller, Get, Inject, Post, Query} from '@midwayjs/core';
-import { BaseController } from './base.controller';
-import { LoginService } from '../service/login.service';
+import {BaseController} from './base.controller';
+import {LoginService} from '../service/login.service';
 import {LoginDTO} from "../dto/login.dto";
 
 @Controller('/')
@@ -21,11 +21,9 @@ export class OpenController extends BaseController {
 
   @Post('/login', {summary: "登录"})
   async login(@Body() login: LoginDTO) {
-     const res = await this.loginService.login(login)
-     console.log(res)
-     // return this.ok(res)
+    const res = await this.loginService.login(login)
+    return this.ok(res)
   }
-
 
 
   @Get('/refreshToken', {

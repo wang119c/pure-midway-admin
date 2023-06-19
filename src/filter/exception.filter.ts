@@ -11,7 +11,6 @@ export class ExceptionFilter {
   coreLogger: ILogger;
 
   async catch(err) {
-    console.log("===111111===")
     this.coreLogger.error(err);
     return {
       code: err.status || RES_CODE.CommFail,

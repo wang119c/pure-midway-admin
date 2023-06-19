@@ -7,7 +7,7 @@
     "@midwayjs/axios": "^3.11.10",
     "@midwayjs/bootstrap": "^3.0.0",
     "@midwayjs/bull": "^3.11.10",
-    "@midwayjs/cache": "^3.11.10",
+    "@midwayjs/cache": "^3.11.11",
     "@midwayjs/captcha": "^3.11.10",
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/decorator": "^3.0.0",
@@ -28,7 +28,9 @@
     "ipip-ipdb": "^0.6.0",
     "lodash": "^4.17.21",
     "mysql2": "^3.3.3",
-    "typeorm": "^0.3.16"
+    "sqlstring": "^2.3.3",
+    "typeorm": "^0.3.16",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@midwayjs/cli": "^2.0.0",
