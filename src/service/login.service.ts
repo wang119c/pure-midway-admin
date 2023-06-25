@@ -1,12 +1,11 @@
 import {Config, HttpStatus, Inject, Provide} from '@midwayjs/core';
-import {BaseService} from './base.service';
 import {CaptchaService} from '@midwayjs/captcha';
 import {CustomHttpError} from '../error/customHttp.error';
 import {RES_MESSAGE} from '../constant';
 import {JwtService} from '@midwayjs/jwt';
 import {LoginDTO} from '../dto/login.dto';
 import {InjectEntityModel} from '@midwayjs/typeorm';
-import {UserEntity} from '../entity/user.entity';
+import {UserEntity} from '../entity/base/user.entity';
 import {Repository} from 'typeorm';
 import {sha256} from '../utils/encrypt';
 import {RedisService} from '@midwayjs/redis';
@@ -15,6 +14,8 @@ import {RoleService} from "./role.service";
 import * as  _ from 'lodash';
 import {MenuService} from "./menu.service";
 import {DepartmentService} from "./department.service";
+import {Context} from "@midwayjs/koa";
+import {BaseService} from "../components/core/src";
 
 // 登录
 
@@ -38,6 +39,8 @@ export class LoginService extends BaseService {
   menuService: MenuService;
   @Inject()
   departmentService: DepartmentService;
+  @Inject()
+  ctx: Context;
 
   /**
    * 验证码
@@ -180,5 +183,17 @@ export class LoginService extends BaseService {
     } catch (error) {
       throw new CustomHttpError(RES_MESSAGE.TokenFail, HttpStatus.FORBIDDEN);
     }
+  }
+
+  /**
+   * 退出登录
+   */
+  async logout() {
+    const { userId } = this.ctx.admin;
+    await this.cacheManager.del(`admin:department:${userId}`);
+    await this.cacheManager.del(`admin:perms:${userId}`);
+    await this.cacheManager.del(`admin:token:${userId}`);
+    await this.cacheManager.del(`admin:token:refresh:${userId}`);
+    await this.cacheManager.del(`admin:passwordVersion:${userId}`);
   }
 }

@@ -1,9 +1,9 @@
 import {Provide} from "@midwayjs/core";
-import {BaseService} from "./base.service";
 import {InjectEntityModel} from "@midwayjs/typeorm";
-import {UserRoleEntity} from "../entity/userRole.entity";
+import {UserRoleEntity} from "../entity/base/userRole.entity";
 import {Repository} from "typeorm";
 import * as  _ from 'lodash';
+import {BaseService} from "../components/core/src";
 
 @Provide()
 export class RoleService extends BaseService {

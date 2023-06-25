@@ -1,12 +1,11 @@
-import {BaseController} from "./base.controller";
 import {ALL, Body, Get, Inject, Post, Provide} from "@midwayjs/core";
 import {UserService} from "../service/user.service";
-import {PureController} from "../decorator/controller.decorator";
-import {PureUrlTag, TagTypes} from "../decorator/tag";
-import {UserEntity} from "../entity/user.entity";
+import {UserEntity} from "../entity/base/user.entity";
 import {PermsService} from "../service/perms.service";
 import {Context} from "@midwayjs/koa";
 import {PureFile} from "../../packages/file";
+import {LoginService} from "../service/login.service";
+import {PureController, PureUrlTag, TagTypes , BaseController} from "../components/core/src";
 
 @PureUrlTag({
   key: TagTypes.IGNORE_TOKEN,
@@ -27,6 +26,9 @@ export class CommController extends BaseController {
 
   @Inject()
   pureFile: PureFile;
+
+  @Inject()
+  loginService: LoginService
 
   // 获取个人信息
   @Get('/person', {
@@ -63,5 +65,16 @@ export class CommController extends BaseController {
     return this.ok(res)
   }
 
+  // 文件上传模式，本地或者云存储
+  async uploadMode() {
+    return this.ok(await this.pureFile.getMode());
+  }
+
+  // 退出
+  @Post('/logout', {summary: "退出"})
+  async logout() {
+    await this.loginService.logout()
+    return this.ok()
+  }
 
 }

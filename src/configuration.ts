@@ -18,6 +18,8 @@ import * as orm from '@midwayjs/typeorm';
 import {ExceptionFilter} from "./filter/exception.filter";
 import {AuthorityMiddleware} from "./middleware/authority.middleware";
 import * as file from '../packages/file'
+import * as pure from './components/core/src'
+import * as task from './components/task/src'
 @Configuration({
   imports: [
     koa,
@@ -30,6 +32,8 @@ import * as file from '../packages/file'
     redis,
     cache,
     orm,
+    pure,
+    task,
     {
       component: swagger,
       enabledEnvironment: ['local']
@@ -48,7 +52,7 @@ export class ContainerLifeCycle {
 
   async onReady() {
     // add middleware
-    this.app.useMiddleware([ReportMiddleware , AuthorityMiddleware]);
+    this.app.useMiddleware([ReportMiddleware, AuthorityMiddleware]);
     // add filter
     this.app.useFilter([ExceptionFilter]);
   }

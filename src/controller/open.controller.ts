@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Inject, Post, Query} from '@midwayjs/core';
-import {BaseController} from './base.controller';
 import {LoginService} from '../service/login.service';
 import {LoginDTO} from "../dto/login.dto";
+import {BaseController} from "../components/core/src";
 
 @Controller('/')
 export class OpenController extends BaseController {
